@@ -1,18 +1,19 @@
 import express from "express";
 import mongoose from "mongoose";
-import User from "./models/users.js";
 import realAuth from "./routes/realAuth.js";
-
+import addHospital from "./routes/addHospitals.js";
 const app = express();
 
 app.use(express.json());
-mongoose
-  .connect("mongodb://localhost:27017/user")
-  .then(() => console.log("connected to db"))
-  .catch((error) => console.log("failed"));
+try {
+  mongoose.connect("mongodb://localhost:27017/CovidApp");
+  console.log("connected to db");
+} catch {
+  console.log("connection failed");
+}
+app.use("/user", realAuth);
 
-app.use("/users", realAuth);
-
+app.use("/hospital", addHospital);
 app.get("/", (req, res) => {
   res.send("hello this ");
 });
