@@ -6,6 +6,7 @@ const verify = (req, res, next) => {
   try {
     const verified = jwt.verify(token, "secret");
     req.user = verified;
+    next();
   } catch {
     (error) => res.send("Invalid token");
   }

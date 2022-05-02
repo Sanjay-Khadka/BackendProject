@@ -7,18 +7,10 @@ import User from "../models/users.js";
 import { registerValidation, loginValidation } from "../validation.js";
 import bcrypt from "bcryptjs";
 import Joi from "joi";
+
 const router = express.Router();
 router.use(express.json());
 
-// const userDb = () => {
-//   try {
-//     mongoose.disconnect("mongodb://localhost:27017/hospital");
-//     mongoose.connect("mongodb://localhost:27017/user");
-//     console.log("connected to  users db");
-//   } catch (error) {
-//     console.log("connection to users db failed");
-//   }
-// };
 router.post("/register", async (req, res) => {
   // userDb();
   const { error } = registerValidation(req.body);
@@ -44,12 +36,9 @@ router.post("/register", async (req, res) => {
     (error) => console.log(error);
     res.status(400).send("User Registration failed");
   }
-  // mongoose.disconnect("mongodb://localhost:27017/user");
 });
 
 router.post("/login", async (req, res) => {
-  // userDb();
-
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.message);
   const user = await User.findOne({
@@ -69,7 +58,6 @@ router.post("/login", async (req, res) => {
     });
   const userdetails = await User.findOne({ email: req.body.email });
   const { fullname, email } = userdetails;
-  console.log(userdetails);
   const token = jwt.sign({ _id: user._id }, "secret");
   res
     .header("auth-token", token)
