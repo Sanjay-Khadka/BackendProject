@@ -67,8 +67,8 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/users", async (req, res) => {
-  const filter = {};
-  const all = await User.find(filter);
+  // const filter = { name: "Januka khadka" };
+  const all = await User.find({});
   res.send(all);
 });
 export default router;

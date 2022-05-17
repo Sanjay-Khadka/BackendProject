@@ -18,17 +18,31 @@ router.post("/hospital", async (req, res) => {
     const savedHospital = await hospitals.save();
     res.send(savedHospital);
   } catch {
-    res.send("couldnot get hospitals");
+    res.send("could not get hospitals");
   }
 });
 
 router.get("/hospitals", verify, async (req, res) => {
-  const all = await Hospital.find({});
+  try {
+    const all = await Hospital.find({});
 
-  const userdata = await User.findOne({ _id: req.user });
-  // res.send(userdata);
+    // const userdata = await User.findOne({ _id: req.user });
+    // res.send(userdata);
 
-  res.send(all);
+    res.send(all);
+  } catch {
+    res.json({ error: "could not get the hospitals list" });
+  }
 });
 
+router.put("/hospitals/:id", verify, async (req, res) => {
+  try {
+    const updatedHotel = await Hospital.findByIdAndUpdate(req.params.id, {
+      $set: req.body,
+    });
+    res.status(200).json(updatedHotel);
+  } catch {
+    res.status(500).json({ error: "could not updated hotel" });
+  }
+});
 export default router;
