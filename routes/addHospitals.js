@@ -8,20 +8,27 @@ const router = express.Router();
 router.use(express.json());
 
 router.post("/hospital", async (req, res) => {
-  const hospitals = new Hospital({
-    district: req.body.district,
-    hospital: req.body.hospital,
-  });
-  const savedHospital = await hospitals.save();
-  // res.send(savedHospital);
+  try {
+    const hospitals = new Hospital({
+      name: req.body.name,
+      address: req.body.address,
+      beds: req.body.bed,
+      oxygen: req.body.bed,
+    });
+    const savedHospital = await hospitals.save();
+    res.send(savedHospital);
+  } catch {
+    res.send("couldnot get hospitals");
+  }
 });
 
 router.get("/hospitals", verify, async (req, res) => {
   const all = await Hospital.find({});
 
   const userdata = await User.findOne({ _id: req.user });
-  res.send(userdata);
-  // res.send(all);
+  // res.send(userdata);
+
+  res.send(all);
 });
 
 export default router;

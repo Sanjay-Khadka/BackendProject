@@ -32,6 +32,7 @@ router.post("/register", async (req, res) => {
   try {
     const savedUser = await users.save();
     res.status(200).send({ uid: savedUser._id });
+    console.log("user was created");
   } catch {
     (error) => console.log(error);
     res.status(400).send("User Registration failed");
@@ -61,7 +62,8 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ _id: user._id }, "secret");
   res
     .header("auth-token", token)
-    .send({ token, userdata: { email, fullname } });
+    .json({ token, userdata: { email, fullname } });
+  console.log("request was made");
 });
 
 router.get("/users", async (req, res) => {

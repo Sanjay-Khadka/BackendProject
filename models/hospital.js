@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
 
 const hospitalSchema = new mongoose.Schema({
-  district: {
-    type: String,
-    required: true,
-    // minlength: 6,
-  },
-  hospital: {
+  name: {
     type: String,
     required: true,
     minlength: 2,
@@ -14,6 +9,16 @@ const hospitalSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  beds: {
+    type: [String],
+  },
+  oxgen: {
+    type: [String],
   },
 });
 
