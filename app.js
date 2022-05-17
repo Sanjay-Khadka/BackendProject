@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import realAuth from "./routes/realAuth.js";
-import addHospital from "./routes/addHospitals.js";
+import Auth from "./routes/Auth.js";
+import Hospitals from "./routes/Hospitals.js";
 import cors from "cors";
 const app = express();
 
@@ -14,9 +14,9 @@ try {
   console.log("connection failed");
 }
 
-app.use("/user", realAuth);
+app.use("/user", Auth);
 
-app.use("/hospital", addHospital);
+app.use("/hospital", Hospitals);
 app.get("/", (req, res) => {
   res.send("hello this ");
 });

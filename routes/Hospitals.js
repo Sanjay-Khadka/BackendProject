@@ -37,9 +37,13 @@ router.get("/hospitals", verify, async (req, res) => {
 
 router.put("/hospitals/:id", verify, async (req, res) => {
   try {
-    const updatedHotel = await Hospital.findByIdAndUpdate(req.params.id, {
-      $set: req.body,
-    });
+    const updatedHotel = await Hospital.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedHotel);
   } catch {
     res.status(500).json({ error: "could not updated hotel" });
