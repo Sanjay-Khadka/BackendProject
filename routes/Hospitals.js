@@ -37,16 +37,25 @@ router.get("/hospitals", verify, async (req, res) => {
 
 router.put("/hospitals/:id", verify, async (req, res) => {
   try {
-    const updatedHotel = await Hospital.findByIdAndUpdate(
+    const updatedHospital = await Hospital.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
       },
       { new: true }
     );
-    res.status(200).json(updatedHotel);
+    res.status(200).json(updatedHospital);
   } catch {
-    res.status(500).json({ error: "could not updated hotel" });
+    res.status(500).json({ error: "could not updated hospital" });
+  }
+});
+
+router.delete("/hospitals/:id", verify, async (req, res) => {
+  try {
+    const deleteHospital = await Hospital.findByIdAndDelete(req.params.id);
+    res.status(200).json({ success: "Hospital deleted Successfully" });
+  } catch {
+    res.status(500).json({ error: "could not delete Hospital" });
   }
 });
 export default router;
