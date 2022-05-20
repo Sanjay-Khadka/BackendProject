@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import Auth from "./routes/Auth.js";
 import Hospitals from "./routes/Hospitals.js";
+import Beds from "./routes/beds.js";
 import cors from "cors";
 const app = express();
 
@@ -17,6 +18,7 @@ try {
 app.use("/user", Auth);
 
 app.use("/hospital", Hospitals);
+app.use("/bed", Beds);
 app.get("/", (req, res) => {
   res.send("hello this ");
 });

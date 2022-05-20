@@ -1,61 +1,20 @@
 import express from "express";
-import mongoose from "mongoose";
-import Hospital from "../models/hospital.js";
-import User from "../models/users.js";
+// import Hospital from "../models/hospital.js";
 import verify from "../models/verifyToken.js";
-
+import {
+  createHospital,
+  deleteHospital,
+  getHospitals,
+  updateHospital,
+} from "../controllers/Hospital.js";
 const router = express.Router();
 router.use(express.json());
 
-router.post("/hospital", async (req, res) => {
-  try {
-    const hospitals = new Hospital({
-      name: req.body.name,
-      address: req.body.address,
-      beds: req.body.bed,
-      oxygen: req.body.bed,
-    });
-    const savedHospital = await hospitals.save();
-    res.send(savedHospital);
-  } catch {
-    res.send("could not get hospitals");
-  }
-});
+router.post("/hospital", createHospital);
 
-router.get("/hospitals", verify, async (req, res) => {
-  try {
-    const all = await Hospital.find({});
+router.get("/hospitals", verify, getHospitals);
 
-    // const userdata = await User.findOne({ _id: req.user });
-    // res.send(userdata);
+router.put("/hospitals/:id", verify, updateHospital);
 
-    res.send(all);
-  } catch {
-    res.json({ error: "could not get the hospitals list" });
-  }
-});
-
-router.put("/hospitals/:id", verify, async (req, res) => {
-  try {
-    const updatedHospital = await Hospital.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updatedHospital);
-  } catch {
-    res.status(500).json({ error: "could not updated hospital" });
-  }
-});
-
-router.delete("/hospitals/:id", verify, async (req, res) => {
-  try {
-    const deleteHospital = await Hospital.findByIdAndDelete(req.params.id);
-    res.status(200).json({ success: "Hospital deleted Successfully" });
-  } catch {
-    res.status(500).json({ error: "could not delete Hospital" });
-  }
-});
+router.delete("/hospitals/:id", verify, deleteHospital);
 export default router;

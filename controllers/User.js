@@ -1,5 +1,5 @@
 import User from "../models/users.js";
-import verify from "../models/verifyToken.js";
+// import verify from "../models/verifyToken.js";
 import { registerValidation, loginValidation } from "../validation.js";
 import jwt from "jsonwebtoken";
 import TOKEN_SECRET from "dotenv";
