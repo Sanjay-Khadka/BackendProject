@@ -7,7 +7,7 @@ export const createHospital = async (req, res) => {
       name: req.body.name,
       address: req.body.address,
       beds: req.body.bed,
-      oxygen: req.body.bed,
+      oxygen: req.body.oxygen,
     });
     const savedHospital = await hospitals.save();
     res.send(savedHospital);

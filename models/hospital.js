@@ -17,7 +17,7 @@ const hospitalSchema = new mongoose.Schema({
   beds: {
     type: [String],
   },
-  oxgen: {
+  oxygens: {
     type: [String],
   },
 });
