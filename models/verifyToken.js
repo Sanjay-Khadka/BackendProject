@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import moment from "moment";
 
 const verify = (req, res, next) => {
   const token = req.header("auth-token");
@@ -17,7 +18,7 @@ const verify = (req, res, next) => {
         return await res.status(403).json({ error: "Token is not valid" });
       req.user = user;
       next();
-      console.log(err);
+      // console.log(err);
     } catch {
       res.status(401).json({ error: "Validation failed" });
     }
