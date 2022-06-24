@@ -5,6 +5,7 @@ import Hospitals from "./routes/hospital_routes.js";
 import Beds from "./routes/bed_routes..js";
 import AddOxygen from "./routes/add_oxygen_route.js";
 import OxygenRequests from "./routes/oxygen_request_routes.js";
+import BedRequests from "./routes/bed_request_routes.js";
 import Admin from "./routes/admin_routes.js";
 import cors from "cors";
 const app = express();
@@ -24,6 +25,7 @@ app.use("/hospital", Hospitals);
 // app.use("/oxygen", Oxygens);
 app.use("/bed", Beds);
 app.use("/oxygen", AddOxygen);
+app.use("/", BedRequests);
 app.use("/", OxygenRequests);
 app.use("/admin", Admin);
 app.get("/", (req, res) => {

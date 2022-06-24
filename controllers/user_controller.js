@@ -1,5 +1,5 @@
 import User from "../models/user_model.js";
-// import verify from "../models/verifyToken.js";
+import verify from "../models/verifyToken.js";
 import { registerValidation, loginValidation } from "../validation.js";
 import jwt from "jsonwebtoken";
 import TOKEN_SECRET from "dotenv";
@@ -54,11 +54,11 @@ export const loginUser = async (req, res) => {
 
   try {
     const userdetails = await User.findOne({ email: req.body.email });
-    const { fullname, email } = userdetails;
+    const { fullname, email, _id } = userdetails;
     const token = jwt.sign({ _id: user._id }, "secret");
     res
       .header("auth-token", token)
-      .json({ token, userdata: { email, fullname } });
+      .json({ token, userdata: { _id, email, fullname } });
     console.log("Login request successfull ");
   } catch (err) {
     res.status(401).json({ error: "couldnot login", err });

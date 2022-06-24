@@ -1,16 +1,14 @@
-import AddOxygen from "../models/oxygen_model.js";
-import User from "../models/user_model.js";
-import Requests from "../models/oxygen_request_model.js";
-import Bed from "../models/bed_model.js";
+import OxygenRequests from "../models/oxygen_request_model.js";
+
 export const createOxygenRequest = async (req, res) => {
   try {
-    const newRequest = new Requests({
+    const OxygenRequest = new OxygenRequests({
       request_type: req.params.requestTypeId,
       requestedBy: req.params.requestedById,
 
       requestedUrgency: req.body.requestedUrgency,
     });
-    const savedRequest = await newRequest.save();
+    const savedRequest = await OxygenRequest.save();
 
     res.status(200).json(savedRequest);
   } catch (err) {
@@ -22,7 +20,9 @@ export const userOxygenRequestList = async (req, res) => {
   const requestedby = req.params.userid;
   console.log(requestedby);
   try {
-    const userRequest = await Requests.find({ userid: req.params.userid });
+    const userRequest = await OxygenRequests.find({
+      userid: req.params.userid,
+    });
     console.log(req.params.id);
     res.json(userRequest);
   } catch (err) {
@@ -32,7 +32,7 @@ export const userOxygenRequestList = async (req, res) => {
 
 export const getAllOxygenRequests = async (req, res) => {
   try {
-    const allRequests = await Requests.find()
+    const allRequests = await OxygenRequests.find()
 
       .populate("request_type")
       .populate("requestedBy")

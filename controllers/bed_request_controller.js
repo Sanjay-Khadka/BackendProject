@@ -1,10 +1,8 @@
-import AddOxygen from "../models/oxygen_model.js";
-import User from "../models/user_model.js";
-import Requests from "../models/request_model.js";
-import Bed from "../models/bed_model.js";
+import BedRequests from "../models/bed_request_model.js";
+
 export const createBedRequest = async (req, res) => {
   try {
-    const newRequest = new Requests({
+    const newRequest = new BedRequests({
       request_type: req.params.requestTypeId,
       requestedBy: req.params.requestedById,
 
@@ -22,7 +20,9 @@ export const userBedRequestList = async (req, res) => {
   const requestedby = req.params.userid;
   console.log(requestedby);
   try {
-    const userRequest = await Requests.find({ userid: req.params.userid });
+    const userBedRequest = await BedRequests.find({
+      userid: req.params.userid,
+    });
     console.log(req.params.id);
     res.json(userRequest);
   } catch (err) {
@@ -32,14 +32,13 @@ export const userBedRequestList = async (req, res) => {
 
 export const getAllBedRequests = async (req, res) => {
   try {
-    const allRequests = await Requests.find()
+    const allBedRequests = await BedRequests.find()
 
       .populate("request_type")
       .populate("requestedBy")
 
       .select("");
-    console.log("asufg");
-    res.json(allRequests);
+    res.json(allBedRequests);
   } catch (err) {
     console.log(err);
     res.json(err);
@@ -48,7 +47,9 @@ export const getAllBedRequests = async (req, res) => {
 
 export const getUrgentBedRequests = async (req, res) => {
   try {
-    const urgentRequest = await Requests.find({ requestedUrgency: "normal" });
+    const urgentRequest = await BedRequests.find({
+      requestedUrgency: "normal",
+    });
     res.json(urgentRequest);
   } catch (err) {
     res.json(err);
