@@ -1,24 +1,18 @@
 import express from "express";
 import {
-  createUser,
-  loginUser,
+  createAdmin,
   updateUser,
   deleteUser,
-  getUser,
   getUsers,
-} from "../controllers/AdminController";
+} from "../controllers/admin_controller.js";
 import verify from "../models/verifyToken.js";
 
 const router = express.Router();
 router.use(express.json());
 
-router.post("/register", createUser);
-
-router.post("/login", loginUser);
+router.post("/register", createAdmin);
 
 router.get("/users", getUsers);
-
-router.get("/user/:id", getUser);
 
 router.delete("/user/:id", verify, deleteUser);
 

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import moment from "moment";
 
-const RequestSchema = new mongoose.Schema({
+const BedRequestSchema = new mongoose.Schema({
   request_type: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Bed",
@@ -26,6 +26,6 @@ const RequestSchema = new mongoose.Schema({
   },
 });
 
-const Requests = new mongoose.model("Request", RequestSchema);
+const BedRequests = new mongoose.model("BedRequest", BedRequestSchema);
 
-export default Requests;
+export default BedRequests;

@@ -1,8 +1,8 @@
 import AddOxygen from "../models/oxygen_model.js";
 import User from "../models/user_model.js";
-import Requests from "../models/request_model.js";
+import Requests from "../models/oxygen_request_model.js";
 import Bed from "../models/bed_model.js";
-export const createRequest = async (req, res) => {
+export const createOxygenRequest = async (req, res) => {
   try {
     const newRequest = new Requests({
       request_type: req.params.requestTypeId,
@@ -18,7 +18,7 @@ export const createRequest = async (req, res) => {
   }
 };
 
-export const userRequestList = async (req, res) => {
+export const userOxygenRequestList = async (req, res) => {
   const requestedby = req.params.userid;
   console.log(requestedby);
   try {
@@ -30,7 +30,7 @@ export const userRequestList = async (req, res) => {
   }
 };
 
-export const getAllRequests = async (req, res) => {
+export const getAllOxygenRequests = async (req, res) => {
   try {
     const allRequests = await Requests.find()
 
@@ -46,7 +46,7 @@ export const getAllRequests = async (req, res) => {
   }
 };
 
-export const getUrgentRequests = async (req, res) => {
+export const getUrgentOxygenRequests = async (req, res) => {
   try {
     const urgentRequest = await Requests.find({ requestedUrgency: "normal" });
     res.json(urgentRequest);
