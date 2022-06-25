@@ -54,3 +54,23 @@ export const getUrgentOxygenRequests = async (req, res) => {
     res.json(err);
   }
 };
+
+export const approvedOxygenrequest = async (req, res) => {
+  const oxygenRequestid = req.params.oxygenrequestid;
+
+  try {
+    await OxygenRequests.findByIdAndUpdate(oxygenRequestid, {
+      $set: { requestStatus: "approved" },
+    });
+    await res.json({
+      message: "oxygen request approved ",
+    });
+  } catch (err) {
+    // next(err);
+    res.json({
+      message: "Sorry couldn't sorry couldnot approve oxygen request",
+      error: err,
+    });
+    console.log(beds);
+  }
+};

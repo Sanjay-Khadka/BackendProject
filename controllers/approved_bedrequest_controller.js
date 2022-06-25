@@ -1,15 +1,18 @@
 import ApprovedBedRequest from "../models/approved_bedrequest_model.js";
-
+import BedRequests from "../models/bed_request_model.js";
 export const approvedBedrequest = async (req, res) => {
-  const bedrequestid = req.params.bedrequestid;
+  const bedRequestid = req.params.bedrequestid;
 
   const newApprovedBed = new ApprovedBedRequest({
-    ApprovedBedRequest: bedrequestid,
+    ApprovedBedRequest: bedRequestid,
+    bedrequestid: bedRequestid,
   });
   try {
+    await BedRequests.findByIdAndUpdate(bedRequestid, {
+      $set: { requestStatus: "approved" },
+    });
     const approvedBedrequest = await newApprovedBed.save();
-
-    res.json({
+    await res.json({
       message: "bed request approved ",
       data: newApprovedBed,
     });
@@ -25,9 +28,13 @@ export const approvedBedrequest = async (req, res) => {
 
 export const getApprovedBed = async (req, res) => {
   try {
-    const approvedoxygen = await ApprovedBedRequest.find()
+    const approvedBed = await ApprovedBedRequest.find()
       .populate("ApprovedBedRequest")
       .select();
+
+    console.log(approvedBed);
+
+    res.json({ message: "Fetched Approved Bed Request", data: approvedBed });
   } catch (err) {
     res.json(err);
   }

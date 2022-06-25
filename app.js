@@ -7,6 +7,7 @@ import AddOxygen from "./routes/add_oxygen_route.js";
 import OxygenRequests from "./routes/oxygen_request_routes.js";
 import BedRequests from "./routes/bed_request_routes.js";
 import Admin from "./routes/admin_routes.js";
+
 import cors from "cors";
 const app = express();
 

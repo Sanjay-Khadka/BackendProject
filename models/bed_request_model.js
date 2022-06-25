@@ -17,8 +17,8 @@ const BedRequestSchema = new mongoose.Schema({
     default: moment(Date.now()).format("MMM DD, h:mm a"),
   },
   requestStatus: {
-    type: Boolean,
-    default: false,
+    type: String,
+    default: "pending",
   },
   requestedUrgency: {
     type: String,

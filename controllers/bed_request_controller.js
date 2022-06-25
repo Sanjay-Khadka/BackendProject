@@ -55,3 +55,24 @@ export const getUrgentBedRequests = async (req, res) => {
     res.json(err);
   }
 };
+
+export const approvedBedrequest = async (req, res) => {
+  const bedRequestid = req.params.bedrequestid;
+
+  try {
+    await BedRequests.findByIdAndUpdate(bedRequestid, {
+      $set: { requestStatus: "approved" },
+    });
+    const approvedBedrequest = await newApprovedBed.save();
+    await res.json({
+      message: "bed request approved ",
+    });
+  } catch (err) {
+    // next(err);
+    res.json({
+      message: "Sorry couldn't sorry couldnot approved bed request",
+      error: err,
+    });
+    console.log(beds);
+  }
+};
