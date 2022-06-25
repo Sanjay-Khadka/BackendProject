@@ -55,7 +55,7 @@ export const getUrgentOxygenRequests = async (req, res) => {
   }
 };
 
-export const approvedOxygenrequest = async (req, res) => {
+export const approveOxygenrequest = async (req, res) => {
   const oxygenRequestid = req.params.oxygenrequestid;
 
   try {

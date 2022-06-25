@@ -56,14 +56,14 @@ export const getUrgentBedRequests = async (req, res) => {
   }
 };
 
-export const approvedBedrequest = async (req, res) => {
+export const approveBedrequest = async (req, res) => {
   const bedRequestid = req.params.bedrequestid;
 
   try {
     await BedRequests.findByIdAndUpdate(bedRequestid, {
       $set: { requestStatus: "approved" },
     });
-    const approvedBedrequest = await newApprovedBed.save();
+
     await res.json({
       message: "bed request approved ",
     });
