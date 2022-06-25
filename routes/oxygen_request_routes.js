@@ -5,6 +5,8 @@ import {
   getAllOxygenRequests,
   getUrgentOxygenRequests,
   approveOxygenrequest,
+  getApprovedOxygen,
+  getUserApprovedOxygen,
 } from "../controllers/oxygen_request_controller.js";
 
 const router = express.Router();
@@ -15,5 +17,6 @@ router.get("/getUoxygenrequests/:userid", userOxygenRequestList);
 router.get("/getalloxygenrequests", getAllOxygenRequests);
 router.get("/geturgentoxygen", getUrgentOxygenRequests);
 router.put("/apOxygen/:oxygenrequestid", approveOxygenrequest);
-
+router.get("/apOxygen/approvedlist", getApprovedOxygen);
+router.get("/apOxygen/:userid", getUserApprovedOxygen);
 export default router;

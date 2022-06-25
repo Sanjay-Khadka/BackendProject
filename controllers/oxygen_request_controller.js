@@ -74,3 +74,40 @@ export const approveOxygenrequest = async (req, res) => {
     console.log(beds);
   }
 };
+
+export const getApprovedOxygen = async (req, res) => {
+  try {
+    const approvedOxygenRequest = await OxygenRequests.find({
+      requestStatus: "approved",
+    })
+      .populate("request_type")
+      .populate("requestedBy")
+      .select();
+
+    res.json({
+      message: "Fetched approved oxygen list",
+      data: approvedOxygenRequest,
+    });
+  } catch (err) {
+    res.json({ message: "couldnot fetch approved oxygen list" });
+  }
+};
+
+export const getUserApprovedOxygen = async (req, res) => {
+  const userid = req.params.userid;
+  try {
+    const userApprovedOxygen = await OxygenRequests.find({
+      requestStatus: "approved",
+      requestedBy: userid,
+    })
+      .populate("request_type")
+      .select();
+
+    res.json({
+      message: "fetched approved oxygen request list ",
+      data: userApprovedOxygen,
+    });
+  } catch (err) {
+    res.json({ message: "sorry couldnot fetch approved oxygen list " });
+  }
+};

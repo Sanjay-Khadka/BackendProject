@@ -76,3 +76,40 @@ export const approveBedrequest = async (req, res) => {
     console.log(beds);
   }
 };
+
+export const getApprovedBed = async (req, res) => {
+  try {
+    const approvedBedRequest = await BedRequests.find({
+      requestStatus: "approved",
+    })
+      .populate("request_type")
+      .populate("requestedBy")
+      .select();
+
+    res.json({
+      message: "Fetched approved bed list",
+      data: approvedBedRequest,
+    });
+  } catch (err) {
+    res.json({ message: "couldnot fetch approved bed list" });
+  }
+};
+
+export const getUserApprovedBed = async (req, res) => {
+  const userid = req.params.userid;
+  try {
+    const userApprovedBed = await BedRequests.find({
+      requestStatus: "approved",
+      requestedBy: userid,
+    })
+      .populate("request_type")
+      .select();
+
+    res.json({
+      message: "fetched approved Bed request list ",
+      data: userApprovedBed,
+    });
+  } catch (err) {
+    res.json({ message: "sorry couldnot fetch approved Bed list " });
+  }
+};
