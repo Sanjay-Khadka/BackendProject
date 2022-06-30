@@ -18,6 +18,7 @@ try {
 
   await mongoose.connect(process.env.DATABASE);
   console.log("connected to db");
+  console.log("testing heroku");
 } catch {
   console.log("connection failed");
 }
