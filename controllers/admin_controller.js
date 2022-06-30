@@ -36,7 +36,7 @@ export const createAdmin = async (req, res) => {
 export const getUsers = async (req, res) => {
   try {
     const allUsers = await User.find({});
-    res.send("what the fuck do you want");
+    res.send(allUsers);
     console.log("all users fetched");
   } catch (err) {
     res.status(404).json({ error: "could not get users", err });
