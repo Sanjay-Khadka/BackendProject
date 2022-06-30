@@ -16,7 +16,7 @@ try {
   const db =
     "mongodb+srv://sanjaykhadka:austinboston12345@covidapp.2nta2y1.mongodb.net/?retryWrites=true&w=majority";
   // mongoose.connect("mongodb://localhost:27017/CovidApp");
-  mongoose.connect(db);
+  // mongoose.connect(db);
   console.log("connected to db");
 } catch {
   console.log("connection failed");
