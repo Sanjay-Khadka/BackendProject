@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
 import Auth from "./routes/user_route.js";
@@ -13,11 +14,9 @@ const app = express();
 app.use(express.json());
 
 try {
-  const db =
-    "mongodb+srv://sanjay:sanjay@cluster0.cnmih5x.mongodb.net/?retryWrites=true&w=majority";
   // mongoose.connect("mongodb://localhost:27017/CovidApp");
 
-  await mongoose.connect(db);
+  await mongoose.connect(process.env.DATABASE);
   console.log("connected to db");
 } catch {
   console.log("connection failed");

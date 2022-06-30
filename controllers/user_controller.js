@@ -2,9 +2,8 @@ import User from "../models/user_model.js";
 import verify from "../models/verifyToken.js";
 import { registerValidation, loginValidation } from "../validation.js";
 import jwt from "jsonwebtoken";
-import TOKEN_SECRET from "dotenv";
+import "dotenv/config";
 import bcrypt from "bcryptjs";
-import Joi from "joi";
 
 export const createUser = async (req, res) => {
   const { error } = registerValidation(req.body);
@@ -55,7 +54,7 @@ export const loginUser = async (req, res) => {
   try {
     const userdetails = await User.findOne({ email: req.body.email });
     const { fullname, email, _id } = userdetails;
-    const token = jwt.sign({ _id: user._id }, "secret");
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res
       .header("auth-token", token)
       .json({ token, userdata: { _id, email, fullname } });
