@@ -8,11 +8,10 @@ import OxygenRequests from "./routes/oxygen_request_routes.js";
 import BedRequests from "./routes/bed_request_routes.js";
 import Admin from "./routes/admin_routes.js";
 
-import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
 try {
   const db =
     "mongodb+srv://sanjaykhadka:austinboston12345@covidapp.2nta2y1.mongodb.net/?retryWrites=true&w=majority";
