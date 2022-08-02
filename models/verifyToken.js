@@ -3,13 +3,6 @@ import "dotenv/config";
 const verify = (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) return res.status(401).json({ error: "Access Denied" });
-  // try {
-  //   const verified = jwt.verify(token, "secret");
-  //   req.user = verified;
-  //   next();
-  // } catch {
-  //   (error) => res.send("Invalid token");
-  // }
 
   jwt.verify(token, process.env.TOKEN_SECRET, async (err, user) => {
     try {

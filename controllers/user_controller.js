@@ -53,15 +53,15 @@ export const loginUser = async (req, res) => {
 
   try {
     const userdetails = await User.findOne({ email: req.body.email });
-    const { fullname, email, _id } = userdetails;
+    const { fullname, email, _id, isAdmin } = userdetails;
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res
       .header("auth-token", token)
-      .json({ token, userdata: { _id, email, fullname } });
+      .json({ token, userdata: { _id, email, fullname, isAdmin } });
     console.log("Login request successfull ");
   } catch (err) {
     res.status(401).json({ error: "couldnot login", err });
-    console.log("Login requres failed");
+    console.log("Login request failed");
   }
 };
 
