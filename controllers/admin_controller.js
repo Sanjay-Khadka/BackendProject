@@ -1,8 +1,7 @@
+import "dotenv/config";
 import User from "../models/user_model.js";
-// import verify from "../models/verifyToken.js";
 import { registerValidation, loginValidation } from "../validation.js";
 import jwt from "jsonwebtoken";
-import TOKEN_SECRET from "dotenv";
 import bcrypt from "bcryptjs";
 import Joi from "joi";
 
