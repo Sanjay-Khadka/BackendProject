@@ -5,12 +5,16 @@ const bedSchema = new mongoose.Schema({
     type: String,
     default: "Bed",
   },
-  price: {
-    type: Number,
+  hospital: {
+    type: String,
     required: true,
   },
   bedNumber: {
     type: Number,
+    required: true,
+  },
+  address: {
+    type: String,
     required: true,
   },
 
@@ -18,7 +22,6 @@ const bedSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  // bedNumbers: [{ number: Number }],
 });
 
 const Bed = new mongoose.model("Bed", bedSchema);
