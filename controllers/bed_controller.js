@@ -34,9 +34,7 @@ export const updateBed = async (req, res) => {
 export const deleteBed = async (req, res) => {
   const bedid = req.params.id;
   try {
-    const deleteBed = await Bed.findByIdAndUpdate(bedid, {
-      $pull: { _id: bedid },
-    });
+    const deleteBed = await Bed.findByIdAndDelete(bedid);
 
     res.status(200).json({ success: "Bed deleted Successfully", deleteBed });
   } catch {
