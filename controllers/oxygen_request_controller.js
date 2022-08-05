@@ -1,5 +1,7 @@
 import OxygenRequests from "../models/oxygen_request_model.js";
 
+import AddOxygen from "../models/oxygen_model.js";
+
 export const createOxygenRequest = async (req, res) => {
   try {
     const OxygenRequest = new OxygenRequests({
@@ -8,8 +10,11 @@ export const createOxygenRequest = async (req, res) => {
 
       requestedUrgency: req.body.requestedUrgency,
     });
-    const savedRequest = await OxygenRequest.save();
 
+    // const savedOxygenRequest = await AddOxygen.findByIdAndUpdate(request_type, {
+    //   $set: { isAvailable: false },
+    // });
+    const savedRequest = await OxygenRequest.save();
     res.status(200).json(savedRequest);
   } catch (err) {
     res.status(402).json(err);
@@ -117,12 +122,10 @@ export const deleteOxygenRequest = async (req, res) => {
   try {
     const deleteoxygenReq = await OxygenRequests.findByIdAndDelete(oxygenreqid);
 
-    res
-      .status(200)
-      .json({
-        success: "Oxtgen request deleted successfully",
-        deleteoxygenReq,
-      });
+    res.status(200).json({
+      success: "Oxygen request deleted successfully",
+      deleteoxygenReq,
+    });
   } catch {
     res.status(500).json({ error: "could not delete oxygen request" });
   }

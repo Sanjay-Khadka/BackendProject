@@ -14,7 +14,7 @@ export const addOxygen = async (req, res) => {
 
 export const fetchAddedOxygen = async (req, res) => {
   try {
-    const addedOxygen = await AddOxygen.find({});
+    const addedOxygen = await AddOxygen.find({ isAvailable: true });
     res.status(200).json(addedOxygen);
   } catch (err) {
     res.status(400).json(err);
