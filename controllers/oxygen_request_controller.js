@@ -111,3 +111,19 @@ export const getUserApprovedOxygen = async (req, res) => {
     res.json({ message: "sorry couldnot fetch approved oxygen list " });
   }
 };
+
+export const deleteOxygenRequest = async (req, res) => {
+  const oxygenreqid = req.params.id;
+  try {
+    const deleteoxygenReq = await OxygenRequests.findByIdAndDelete(oxygenreqid);
+
+    res
+      .status(200)
+      .json({
+        success: "Oxtgen request deleted successfully",
+        deleteoxygenReq,
+      });
+  } catch {
+    res.status(500).json({ error: "could not delete oxygen request" });
+  }
+};

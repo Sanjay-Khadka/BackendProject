@@ -20,3 +20,16 @@ export const fetchAddedOxygen = async (req, res) => {
     res.status(400).json(err);
   }
 };
+
+export const deleteOxygen = async (req, res) => {
+  const oxygenid = req.params.id;
+  try {
+    const deleteoxygen = await AddOxygen.findByIdAndDelete(oxygenid);
+
+    res
+      .status(200)
+      .json({ success: "Oxygen deleted Successfully", deleteoxygen });
+  } catch {
+    res.status(500).json({ error: "could not delete oxygen" });
+  }
+};

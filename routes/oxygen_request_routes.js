@@ -7,6 +7,7 @@ import {
   approveOxygenrequest,
   getApprovedOxygen,
   getUserApprovedOxygen,
+  deleteOxygenRequest,
 } from "../controllers/oxygen_request_controller.js";
 
 const router = express.Router();
@@ -19,4 +20,5 @@ router.get("/geturgentoxygen", getUrgentOxygenRequests);
 router.put("/apOxygen/:oxygenrequestid", approveOxygenrequest);
 router.get("/apOxygen/approvedlist", getApprovedOxygen);
 router.get("/apOxygen/:userid", getUserApprovedOxygen);
+router.delete("/oxygenReq/delete/:id", deleteOxygenRequest);
 export default router;

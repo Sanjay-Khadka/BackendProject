@@ -113,3 +113,16 @@ export const getUserApprovedBed = async (req, res) => {
     res.json({ message: "sorry couldnot fetch approved Bed list " });
   }
 };
+
+export const deleteBedRequest = async (req, res) => {
+  const bedreqid = req.params.id;
+  try {
+    const deletebedReq = await BedRequests.findByIdAndDelete(bedreqid);
+
+    res
+      .status(200)
+      .json({ success: "Bed request deleted successfully", deletebedReq });
+  } catch {
+    res.status(500).json({ error: "could not delete Bed request" });
+  }
+};

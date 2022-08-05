@@ -7,6 +7,7 @@ import {
   approveBedrequest,
   getApprovedBed,
   getUserApprovedBed,
+  deleteBedRequest,
 } from "../controllers/bed_request_controller.js";
 
 const router = express.Router();
@@ -19,4 +20,5 @@ router.get("/geturgentBed", getUrgentBedRequests);
 router.put("/apbed/:bedrequestid", approveBedrequest);
 router.get("/apbed/approvedbed", getApprovedBed);
 router.get("/apbed/:userid", getUserApprovedBed);
+router.delete("/bedReq/delete/:id", deleteBedRequest);
 export default router;
