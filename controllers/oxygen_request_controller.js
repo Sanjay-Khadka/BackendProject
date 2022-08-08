@@ -3,6 +3,7 @@ import OxygenRequests from "../models/oxygen_request_model.js";
 import AddOxygen from "../models/oxygen_model.js";
 
 export const createOxygenRequest = async (req, res) => {
+  const requestid = req.params.requestTypeId;
   try {
     const OxygenRequest = new OxygenRequests({
       request_type: req.params.requestTypeId,
@@ -11,13 +12,22 @@ export const createOxygenRequest = async (req, res) => {
       requestedUrgency: req.body.requestedUrgency,
     });
 
-    // const savedOxygenRequest = await AddOxygen.findByIdAndUpdate(request_type, {
-    //   $set: { isAvailable: false },
-    // });
     const savedRequest = await OxygenRequest.save();
-    res.status(200).json(savedRequest);
+
+    try {
+      const savedOxygenRequest = await AddOxygen.findByIdAndUpdate(requestid, {
+        $set: { isAvailable: false },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+    res.json({
+      success: "Oxygen request submission successfull",
+      data: savedRequest,
+    });
   } catch (err) {
-    res.status(402).json(err);
+    res.json({ error: err });
   }
 };
 
