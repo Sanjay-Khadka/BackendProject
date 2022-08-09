@@ -22,9 +22,10 @@ export const userBedRequestList = async (req, res) => {
   try {
     const userBedRequest = await BedRequests.find({
       userid: req.params.userid,
-    });
-    console.log(req.params.id);
-    res.json(userRequest);
+    })
+      .populate("request_type")
+      .select("");
+    res.json(userBedRequest);
   } catch (err) {
     res.status(400).json({ error: "error could not get requests list" });
   }
