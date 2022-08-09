@@ -104,7 +104,7 @@ export const getUserApprovedBed = async (req, res) => {
       requestedBy: userid,
     })
       .populate("request_type")
-      .select();
+      .select("");
 
     res.json({
       message: "fetched approved Bed request list ",

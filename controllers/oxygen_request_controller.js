@@ -37,11 +37,13 @@ export const userOxygenRequestList = async (req, res) => {
   try {
     const userRequest = await OxygenRequests.find({
       userid: req.params.userid,
-    });
+    })
+      .populate("request_type")
+      .select("");
     console.log(req.params.id);
     res.json(userRequest);
   } catch (err) {
-    res.status(400).json({ error: "error could not get requests list" });
+    res.status(400).json({ error: "error could not get oxygen requests list" });
   }
 };
 
@@ -53,7 +55,6 @@ export const getAllOxygenRequests = async (req, res) => {
       .populate("requestedBy")
 
       .select("");
-    console.log("asufg");
     res.json(allRequests);
   } catch (err) {
     console.log(err);
@@ -81,7 +82,6 @@ export const approveOxygenrequest = async (req, res) => {
       message: "oxygen request approved ",
     });
   } catch (err) {
-    // next(err);
     res.json({
       message: "Sorry couldn't sorry couldnot approve oxygen request",
       error: err,
@@ -116,7 +116,7 @@ export const getUserApprovedOxygen = async (req, res) => {
       requestedBy: userid,
     })
       .populate("request_type")
-      .select();
+      .select("");
 
     res.json({
       message: "fetched approved oxygen request list ",
