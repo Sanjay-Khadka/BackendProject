@@ -16,7 +16,7 @@ app.use(express.json());
 try {
   // mongoose.connect("mongodb://localhost:27017/CovidApp");
 
-  await mongoose.connect(process.env.DATABASE);
+  mongoose.connect(process.env.DATABASE);
   console.log("connected to db");
   console.log("testing heroku");
 } catch {
