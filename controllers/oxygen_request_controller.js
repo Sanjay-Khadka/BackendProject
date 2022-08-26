@@ -36,7 +36,7 @@ export const userOxygenRequestList = async (req, res) => {
   console.log(requestedby);
   try {
     const userRequest = await OxygenRequests.find({
-      userid: req.params.userid,
+      requestedBy: requestedby,
     })
       .populate("request_type")
       .select("");
