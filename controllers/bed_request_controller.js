@@ -21,7 +21,7 @@ export const userBedRequestList = async (req, res) => {
   console.log(requestedby);
   try {
     const userBedRequest = await BedRequests.find({
-      userid: req.params.userid,
+      requestedBy: requestedby,
     })
       .populate("request_type")
       .select("");
